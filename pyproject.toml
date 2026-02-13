@@ -646,6 +646,7 @@ redefining-builtins-modules = ["six.moves", "past.builtins", "future.builtins", 
 [tool.pytest.ini_options]
 addopts = ["--import-mode=importlib",]
 pythonpath = "."
+qt_api = "pyqt6"
 markers = [
     "obj_args"
 ]
