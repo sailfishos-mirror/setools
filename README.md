@@ -76,17 +76,6 @@ and perform the following at the root:
 This will compile the C portion of SETools locally, and then
 the tools can be ran from the current directory (e.g. `./seinfo`).
 
-### Rebuilding the Apol Help File
-
-For convenience, a prebuilt copy of the apol help data file is included.
-To rebuild this file, the Qt5 development tools are required
-(particularly, the `qcollectiongenerator` tool).  At the root
-of the SETools sources, perform the following:
-
-```bash
-  $ python setup.py build_qhc
-```
-
 ### Installing SETools
 
 Unpack the official distribution or check out the git repository,
