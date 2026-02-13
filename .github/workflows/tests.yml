@@ -26,25 +26,32 @@ jobs:
       fail-fast: false
 
       matrix:
-        build-opts:
-          - {python: '3.10', tox: python3}
-          - {python: '3.11', tox: python3}
-          - {python: '3.12', tox: python3}
-          - {python: '3.13', tox: python3}
+        # unit tests
+        python:
+          - "3.10"
+          - "3.11"
+          - "3.12"
+          - "3.13"
+          - "3.14"
+        tox:
+          - "python3"
+        include:
+          # static analysis
           - {python: '3.11', tox: pep8}
           - {python: '3.11', tox: lint}
           - {python: '3.11', tox: mypy}
           - {python: '3.11', tox: coverage}
+          # install test
           - {python: '3.11', tox: install}
 
     steps:
     - uses: actions/checkout@v3
 
     # This should be the minimum required Python version to build refpolicy.
-    - name: Set up Python ${{ matrix.build-opts.python }}
+    - name: Set up Python ${{ matrix.python }}
       uses: actions/setup-python@v6
       with:
-        python-version: ${{ matrix.build-opts.python }}
+        python-version: ${{ matrix.python }}
 
     - name: Install dependencies
       run: |
@@ -90,6 +97,6 @@ jobs:
       run: |
         # confirm python version
         python --version
-        python -m tox -e ${{ matrix.build-opts.tox }}
+        python -m tox -e ${{ matrix.tox }}
       env:
         LD_LIBRARY_PATH: "${{env.SEPOL_SRC}}/src:${{env.SELINUX_SRC}}/src:${LD_LIBRARY_PATH}"
